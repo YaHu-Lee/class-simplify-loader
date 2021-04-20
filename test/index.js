@@ -1,7 +1,7 @@
 const webpack = require('webpack')
 webpack({
   entry: "./example/index.js",
-  mode: "none",
+  mode: "production",
   module: {
     rules: [{
       test: /\.less$/,
@@ -9,17 +9,17 @@ webpack({
     }, {
       test: /\.(js|jsx)/,
       exclude: /node_modules/,
-      use: ["../class-simplify-js-loader", {
+      use: [{
         loader: "babel-loader",
         options: {
           presets: [
-            ['@babel/preset-env', { targets: "defaults" }],
             ['@babel/preset-react']
           ]
         }
-      }]
+      }, "../class-simplify-js-loader"]
     }]
   },
+  cache: false
 }, (err, stats) => {
   if (err) {
     console.error(err.stack || err);

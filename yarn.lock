@@ -3961,7 +3961,7 @@ postcss-value-parser@^4.1.0:
   resolved "https://registry.npm.taobao.org/postcss-value-parser/download/postcss-value-parser-4.1.0.tgz#443f6a20ced6481a2bda4fa8532a6e55d789a2cb"
   integrity sha1-RD9qIM7WSBor2k+oUypuVdeJoss=
 
-postcss@^8.2.8:
+postcss@^8.2.10, postcss@^8.2.8:
   version "8.2.10"
   resolved "https://registry.npm.taobao.org/postcss/download/postcss-8.2.10.tgz#ca7a042aa8aff494b334d0ff3e9e77079f6f702b"
   integrity sha1-ynoEKqiv9JSzNND/Pp53B59vcCs=

@@ -58,8 +58,13 @@ module.exports = function loader(source) {
   babel.traverse(result, {
     JSXOpeningElement(path) {
       const node = path.node
-      const classList = node.attributes?.filter((attr) => attr.name.name === 'className')[0]?.value.value
+      const classBlock = node.attributes?.filter((attr) => attr.name.name === 'className')[0]
+      const classList = classBlock?.value.value
       const id = dom.handleOpening(classList)
+      if(!classBlock)return
+      classBlock.name.name = 'id'
+      classBlock.value.value = '' + id
+
     },
     JSXClosingElement(path) {
       dom.handleClosing()

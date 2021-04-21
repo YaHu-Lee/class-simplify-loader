@@ -3,7 +3,6 @@ const generator = require("@babel/generator").default
 const utils = require("util")
 
 module.exports = function loader(source) {
-  console.log(source)
   const result = babel.parseSync(source, {
     plugins: ["@babel/plugin-syntax-jsx"],
   })
@@ -33,11 +32,12 @@ module.exports = function loader(source) {
       const selfDescribe = {
         parent: this.currentNode,
         children: [],
-        classList,
-        id: Math.random() * 1000
+        classList: classList || "",
+        id: 'L' + Math.floor(Math.random() * 1000)
       }
       this.currentNode.children.push(selfDescribe)
       if(!this.isCurrentSelfComplete)this.currentNode = selfDescribe
+      return selfDescribe.id
     },
     handleClosing() {
       this.currentNode = this.currentNode.parent
@@ -59,7 +59,7 @@ module.exports = function loader(source) {
     JSXOpeningElement(path) {
       const node = path.node
       const classList = node.attributes?.filter((attr) => attr.name.name === 'className')[0]?.value.value
-      dom.handleOpening(classList)
+      const id = dom.handleOpening(classList)
     },
     JSXClosingElement(path) {
       dom.handleClosing()

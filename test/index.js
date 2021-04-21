@@ -5,7 +5,7 @@ webpack({
   module: {
     rules: [{
       test: /\.less$/,
-      use: ["css-loader", "../class-simplify-css-loader", "less-loader"]
+      use: ["style-loader", "css-loader", "../class-simplify-css-loader", "less-loader"]
     }, {
       test: /\.(js|jsx)/,
       exclude: /node_modules/,

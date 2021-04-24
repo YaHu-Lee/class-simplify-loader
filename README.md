@@ -1,6 +1,11 @@
 # class-simplify-loader
 
-**一套**可以对`react`项目中的样式表针对浏览器查询过程进行优化的`Webpack Loader`
+**一套**可以对`react`项目中的样式表针对浏览器查询过程进行优化的`Webpack Loader`。其具有以下优势：
+
+* 针对CSS的Tree Shaking
+* 让浏览器更快地渲染
+* 对样式冲突说拜拜
+
 为了实现这一目的，需要使用两个`loader`分别用以处理`css`文件和`jsx`文件，要体验这套插件提供的功能，必须**同时安装并使用以下两个插件**
 
 ## class-simplify-jsx-loader

@@ -16,8 +16,6 @@ module.exports = function loader(source) {
   }
   findDomTree()
   const result = renderCSS()
-  console.log("优化结果")
-  console.log(result)
   return result
   function findDomTree() {
     const domTreeArray = global.domTreeArray
@@ -63,9 +61,8 @@ module.exports = function loader(source) {
             m_classRules[currentSelector] = []
           }
           m_classRules[currentSelector].push(Object.assign({}, rule, {selector, searchPath}))
-          console.log("向classHash中添加" + currentSelector)
           classBloomFilter.set(currentSelector)
-        } else if(tagReg.test(currentSelector)) {                                    // 标签选择器
+        } else if(tagReg.test(currentSelector)) {                                 // 标签选择器
           if(!m_tagRules[currentSelector]) {
             m_tagRules[currentSelector] = []
           }
@@ -83,17 +80,16 @@ module.exports = function loader(source) {
     while(nodeArray.length) {
       const currentNode = nodeArray.pop()
       currentNode.children.forEach(child => nodeArray.push(child))
-      searchCSSByClass(currentNode)         // 暂时先实现依照 class 匹配
+      searchCSSByClass(currentNode)                                               // 暂时先实现依照 class 匹配
     }
   }
   function searchCSSByClass(node) {
-    const resultRules = []                       // 这里存放所有与当前 Node 节点相符合的所有 Rules
+    const resultRules = []                                        // 这里存放所有与当前 Node 节点相符合的所有 Rules
     const nodeClassList = node.classList?.trim().split(' ') || [] // 提取node的className
     nodeClassList.forEach(nodeClass => {
       if(nodeClass === "")return
       const className = '.' + nodeClass
       if(classBloomFilter.no(className)) {
-        console.log(`在classHash中未找到 ${className}`)
         return
       } else {
         const matchedRules = m_classRules[className]
@@ -105,7 +101,7 @@ module.exports = function loader(source) {
         })
       }
     })
-    DOM2CSS_Class.set(node, resultRules)              // 将当前 DOM 节点与其所对应的 CSS Rules 关联起来
+    DOM2CSS_Class.set(node, resultRules)                          // 将当前 DOM 节点与其所对应的 CSS Rules 关联起来
   }
   function isMatched(node, rule) {
     let currentNode = node
